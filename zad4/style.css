@@ -1,0 +1,103 @@
+/* Zmienne CSS dla płynnej zmiany motywu */
+:root {
+    --bg-color: #e8f5e9;
+    --text-color: #1b5e20;
+    --header-bg: #4caf50;
+    --header-text: #ffffff;
+    --btn-bg: #2e7d32;
+    --btn-hover: #1b5e20;
+}
+
+body.theme-red {
+    --bg-color: #ffebee;
+    --text-color: #b71c1c;
+    --header-bg: #f44336;
+    --header-text: #ffffff;
+    --btn-bg: #c62828;
+    --btn-hover: #b71c1c;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: slideDown 0.8s ease-out;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, opacity 0.4s ease;
+    animation: fadeIn 1s ease-in-out;
+}
+
+section:hover {
+    transform: translateY(-5px);
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+button {
+    background-color: var(--btn-bg);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background-color: var(--btn-hover);
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* Klasa do ukrywania sekcji (Zadanie 4) */
+.hidden {
+    display: none !important;
+}
+
+/* Animacje */
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
