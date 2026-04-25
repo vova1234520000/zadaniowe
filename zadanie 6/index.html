@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Volodymyr Buslenko</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-green">
+    <header>
+        <h1>Volodymyr Buslenko</h1>
+        <p>Numer indeksu: 66689 </p>
+        <div class="controls">
+            <button id="theme-toggle">Zmień motyw (Green / Red)</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="o-mnie">
+            <h2>O mnie</h2>
+            <p>Jestem ambitnym studentem, pasjonującym się tworzeniem nowoczesnych i interaktywnych stron internetowych. Szybko się uczę i chętnie podejmuję nowe wyzwania.</p>
+        </section>
+
+        <div class="controls">
+            <button id="section-toggle">Ukryj / Pokaż sekcję "Projekty"</button>
+        </div>
+
+        <section id="projekty">
+            <h2>Projekty / Portfolio</h2>
+            <ul id="projekty-list">
+                </ul>
+        </section>
+
+        <section id="umiejetnosci">
+            <h2>Umiejętności</h2>
+            <ul id="umiejetnosci-list">
+                </ul>
+        </section>
+
+        <section id="kontakt">
+            <h2>Kontakt</h2>
+            <form id="kontakt-form">
+                <div class="form-group">
+                    <label for="imie">Imię:</label>
+                    <input type="text" id="imie" name="imie">
+                </div>
+                <div class="form-group">
+                    <label for="nazwisko">Nazwisko:</label>
+                    <input type="text" id="nazwisko" name="nazwisko">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="wiadomosc">Wiadomość:</label>
+                    <textarea id="wiadomosc" name="wiadomosc" rows="4"></textarea>
+                </div>
+                <button type="submit">Wyślij</button>
+                <div id="form-messages" class="form-messages"></div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Volodymyr Buslenko | Numer indeksu: 66689</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
