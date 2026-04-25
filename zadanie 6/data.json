@@ -1,0 +1,21 @@
+{
+  "projekty": [
+    {
+      "nazwa": "Aplikacja ToDo",
+      "opis": "Prosta i szybka aplikacja napisana w czystym JavaScript."
+    },
+    {
+      "nazwa": "Animowane CV",
+      "opis": "Moja osobista wizytówka stworzona z użyciem HTML5 i CSS3."
+    },
+    {
+      "nazwa": "Kalkulator",
+      "opis": "Interaktywny projekt zaliczeniowy z obsługą zdarzeń."
+    }
+  ],
+  "umiejetnosci": [
+    "HTML5, CSS3, JavaScript (ES6+)",
+    "Git, GitHub, Podstawy UI/UX",
+    "Praca z API (Fetch, JSON)"
+  ]
+}
