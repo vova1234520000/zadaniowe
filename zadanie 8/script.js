@@ -1,36 +1,50 @@
 // ==========================================
-// 4. Pobieranie danych z JSON (Zadanie 6)
+// ZADANIE 4 i 5 - Manipulacja DOM i Motyw
 // ==========================================
-const projektyList = document.getElementById('projekty-list');
-const umiejetnosciList = document.getElementById('umiejetnosci-list');
+const themeBtn = document.getElementById('theme-toggle-btn');
+const projectsBtn = document.getElementById('projects-toggle-btn');
+const projectsSection = document.getElementById('projects-section');
 
-// Uruchamiamy fetch tylko jeśli elementy istnieją na stronie
-if (projektyList && umiejetnosciList) {
-    fetch('data.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Błąd sieci!');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Generowanie projektów
-            data.projekty.forEach(projekt => {
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${projekt.nazwa}:</strong> ${projekt.opis}`;
-                projektyList.appendChild(li);
-            });
-
-            // Generowanie umiejętności
-            data.umiejetnosci.forEach(umiejetnosc => {
-                const li = document.createElement('li');
-                li.textContent = umiejetnosc;
-                umiejetnosciList.appendChild(li);
-            });
-        })
-        .catch(error => console.error('Błąd pobierania danych JSON:', error));
+// Zmiana motywu (Green / Red)
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        // Sprawdzamy aktualny kolor tła body
+        if (document.body.style.backgroundColor === 'red') {
+            document.body.style.backgroundColor = 'green';
+        } else {
+            document.body.style.backgroundColor = 'red';
+        }
+    });
 }
 
+// Ukrywanie / Pokazywanie sekcji projekty
+if (projectsBtn && projectsSection) {
+    projectsBtn.addEventListener('click', () => {
+        if (projectsSection.style.display === 'none') {
+            projectsSection.style.display = 'block';
+            projectsBtn.textContent = 'Ukryj sekcję "Projekty"';
+        } else {
+            projectsSection.style.display = 'none';
+            projectsBtn.textContent = 'Pokaż sekcję "Projekty"';
+        }
+    });
+}
+
+// ==========================================
+// ZADANIE 6 - JSON Data
+// ==========================================
+const projektyList = document.getElementById('projekty-list');
+if (projektyList) {
+    fetch('data.json')
+        .then(res => res.json())
+        .then(data => {
+            data.projekty.forEach(p => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${p.nazwa}</strong>: ${p.opis}`;
+                projektyList.appendChild(li);
+            });
+        });
+}
 
 // ==========================================
 // ZADANIE 7 - Local Storage
@@ -39,115 +53,60 @@ const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
 
-// Funkcja do pobierania danych z localStorage
 function getTasks() {
-    const tasks = localStorage.getItem('myTasks');
-    return tasks ? JSON.parse(tasks) : [];
+    return JSON.parse(localStorage.getItem('myTasks') || '[]');
 }
 
-// Funkcja do zapisywania danych w localStorage
-function saveTasks(tasks) {
-    localStorage.setItem('myTasks', JSON.stringify(tasks));
-}
-
-// Funkcja do wyświetlania zadań na ekranie
 function renderTasks() {
     if (!taskList) return;
-    taskList.innerHTML = ''; 
-    const tasks = getTasks();
-
-    tasks.forEach((task, index) => {
+    taskList.innerHTML = '';
+    getTasks().forEach((task, index) => {
         const li = document.createElement('li');
         li.textContent = task;
-
-        // Przycisk usuwania dla każdego elementu
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Usuń'; // Змінено на польську
-        deleteBtn.style.marginLeft = '10px';
-        deleteBtn.onclick = () => {
-            deleteTask(index);
+        const btn = document.createElement('button');
+        btn.textContent = 'Usuń';
+        btn.onclick = () => {
+            const t = getTasks();
+            t.splice(index, 1);
+            localStorage.setItem('myTasks', JSON.stringify(t));
+            renderTasks();
         };
-
-        li.appendChild(deleteBtn);
+        li.appendChild(btn);
         taskList.appendChild(li);
     });
 }
 
-// Funkcja dodawania nowego zadania
-if (addTaskBtn && taskInput) {
+if (addTaskBtn) {
     addTaskBtn.addEventListener('click', () => {
-        const newTask = taskInput.value.trim();
-        if (newTask !== '') {
-            const tasks = getTasks();
-            tasks.push(newTask); 
-            saveTasks(tasks);    
-            taskInput.value = '';
-            renderTasks();       
-        }
+        const t = getTasks();
+        t.push(taskInput.value);
+        localStorage.setItem('myTasks', JSON.stringify(t));
+        taskInput.value = '';
+        renderTasks();
     });
 }
-
-// Funkcja usuwania zadania
-function deleteTask(index) {
-    const tasks = getTasks();
-    tasks.splice(index, 1); 
-    saveTasks(tasks);       
-    renderTasks();          
-}
-
-// Uruchamiamy renderowanie po załadowaniu strony
 document.addEventListener('DOMContentLoaded', renderTasks);
 
-
 // ==========================================
-// ZADANIE 8 - Obsługa Backend (MockAPI)
+// ZADANIE 8 - Backend (MockAPI)
 // ==========================================
 const backendForm = document.getElementById('backendForm');
-const formStatus = document.getElementById('formStatus');
-
-// Twoj osobisty link do MockAPI
 const backendURL = 'https://6a006cb02b7ab349603052fa.mockapi.io/users'; 
 
 if (backendForm) {
-    backendForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Zatrzymuje odświeżanie strony
-
-        // Pobieramy dane z pól formularza
-        const formData = {
+    backendForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = {
             name: document.getElementById('userName').value,
-            email: document.getElementById('userEmail').value,
-            createdAt: new Date().toISOString() // Opcjonalnie: data dodania
+            email: document.getElementById('userEmail').value
         };
-
-        // Wysyłanie danych metodą POST
         fetch(backendURL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Błąd połączenia z serwerem');
-        })
-        .then(data => {
-            console.log('Dane zapisane na serwerze:', data);
-            
-            // Pokazujemy komunikat o sukcesie
-            formStatus.style.display = 'block';
-            backendForm.reset(); // Czyścimy pola formularza
-            
-            // Ukrywamy komunikat po 4 sekundach
-            setTimeout(() => {
-                formStatus.style.display = 'none';
-            }, 4000);
-        })
-        .catch(error => {
-            console.error('Błąd:', error);
-            alert('Wystąpił błąd podczas wysyłania danych na serwer.');
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(() => {
+            document.getElementById('formStatus').style.display = 'block';
+            backendForm.reset();
         });
     });
 }
