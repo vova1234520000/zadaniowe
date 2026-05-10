@@ -9,9 +9,11 @@
 <body class="theme-green">
     <header>
         <h1>Volodymyr Buslenko</h1>
-        <p>Numer indeksu: 66689 </p>
-        <div class="controls">
-            <button id="theme-toggle">Zmień motyw (Green / Red)</button>
+        <p>Numer indeksu: 66689</p>
+        
+        <div id="controls" style="text-align: center; margin-bottom: 20px;">
+            <button id="theme-toggle-btn" style="padding: 10px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc;">Zmień motyw (Green / Red)</button>
+            <button id="projects-toggle-btn" style="padding: 10px; cursor: pointer; margin-left: 10px; border-radius: 5px; border: 1px solid #ccc;">Ukryj / Pokaż sekcję "Projekty"</button>
         </div>
     </header>
 
@@ -21,11 +23,7 @@
             <p>Jestem ambitnym studentem, pasjonującym się tworzeniem nowoczesnych i interaktywnych stron internetowych. Szybko się uczę i chętnie podejmuję nowe wyzwania.</p>
         </section>
 
-        <div class="controls">
-            <button id="section-toggle">Ukryj / Pokaż sekcję "Projekty"</button>
-        </div>
-
-        <section id="projekty">
+        <section id="projects-section">
             <h2>Projekty / Portfolio</h2>
             <ul id="projekty-list">
                 </ul>
@@ -36,29 +34,32 @@
             <ul id="umiejetnosci-list">
                 </ul>
         </section>
+
         <div id="task-section">
-  <h3>Zadanie 7 (Task 7)</h3>
-  <input type="text" id="taskInput" placeholder="Napisz.">
-  <button id="addTaskBtn">Dodaj</button>
-  <ul id="taskList"></ul>
-</div>
-      <div id="backend-section" style="margin-top: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
-  <h3>Komunikacja z serwerem (Zadanie 8)</h3>
-  <form id="backendForm">
-    <div style="margin-bottom: 10px;">
-      <input type="text" id="userName" placeholder="Twoje imię" required style="padding: 8px; width: 200px;">
-    </div>
-    <div style="margin-bottom: 10px;">
-      <input type="email" id="userEmail" placeholder="Twój e-mail" required style="padding: 8px; width: 200px;">
-    </div>
-    <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
-      Wyślij na serwer
-    </button>
-  </form>
-  <p id="formStatus" style="color: green; font-weight: bold; display: none; margin-top: 15px;">
-    Dane zostały pomyślnie wysłane do MockAPI!
-  </p>
-</div>
+            <h3>Zadanie 7 (Local Storage)</h3>
+            <input type="text" id="taskInput" placeholder="Napisz zadanie...">
+            <button id="addTaskBtn">Dodaj</button>
+            <ul id="taskList"></ul>
+        </div>
+        
+        <div id="backend-section" style="margin-top: 30px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+            <h3>Komunikacja z serwerem (Zadanie 8)</h3>
+            <form id="backendForm">
+                <div style="margin-bottom: 10px;">
+                    <input type="text" id="userName" placeholder="Twoje imię" required style="padding: 8px; width: 200px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <input type="email" id="userEmail" placeholder="Twój e-mail" required style="padding: 8px; width: 200px;">
+                </div>
+                <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Wyślij na serwer
+                </button>
+            </form>
+            <p id="formStatus" style="color: green; font-weight: bold; display: none; margin-top: 15px;">
+                Dane zostały pomyślnie wysłane do MockAPI!
+            </p>
+        </div>
+
         <section id="kontakt">
             <h2>Kontakt</h2>
             <form id="kontakt-form">
